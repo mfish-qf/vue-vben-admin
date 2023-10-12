@@ -56,6 +56,7 @@
   </PageWrapper>
 </template>
 <script lang="ts">
+  import { type Recordable } from '@vben/types';
   import { computed, defineComponent, unref, ref } from 'vue';
   import { BasicForm, FormSchema, ApiSelect } from '/@/components/Form/index';
   import { CollapseContainer } from '/@/components/Container';
@@ -65,25 +66,25 @@
   import { optionsListApi } from '/@/api/demo/select';
   import { useDebounceFn } from '@vueuse/core';
   import { treeOptionsListApi } from '/@/api/demo/tree';
-  import { Select } from 'ant-design-vue';
+  import { Select, type SelectProps } from 'ant-design-vue';
   import { cloneDeep } from 'lodash-es';
   import { areaRecord } from '/@/api/demo/cascader';
   import { uploadApi } from '/@/api/sys/upload';
 
   const valueSelectA = ref<string[]>([]);
   const valueSelectB = ref<string[]>([]);
-  const options = ref<Recordable[]>([]);
+  const options = ref<Required<SelectProps>['options']>([]);
   for (let i = 1; i < 10; i++) options.value.push({ label: '选项' + i, value: `${i}` });
 
   const optionsA = computed(() => {
     return cloneDeep(unref(options)).map((op) => {
-      op.disabled = unref(valueSelectB).indexOf(op.value) !== -1;
+      op.disabled = unref(valueSelectB).indexOf(op.value as string) !== -1;
       return op;
     });
   });
   const optionsB = computed(() => {
     return cloneDeep(unref(options)).map((op) => {
-      op.disabled = unref(valueSelectA).indexOf(op.value) !== -1;
+      op.disabled = unref(valueSelectA).indexOf(op.value as string) !== -1;
       return op;
     });
   });
@@ -624,10 +625,28 @@
     {
       field: '[startTime, endTime]',
       label: '时间范围',
+      component: 'TimeRangePicker',
+      componentProps: {
+        format: 'HH:mm:ss',
+        placeholder: ['开始时间', '结束时间'],
+      },
+    },
+    {
+      field: '[startDate, endDate]',
+      label: '日期范围',
+      component: 'RangePicker',
+      componentProps: {
+        format: 'YYYY-MM-DD',
+        placeholder: ['开始日期', '结束日期'],
+      },
+    },
+    {
+      field: '[startDateTime, endDateTime]',
+      label: '日期时间范围',
       component: 'RangePicker',
       componentProps: {
         format: 'YYYY-MM-DD HH:mm:ss',
-        placeholder: ['开始时间', '结束时间'],
+        placeholder: ['开始日期、时间', '结束日期、时间'],
         showTime: { format: 'HH:mm:ss' },
       },
     },
@@ -686,7 +705,7 @@
       const check = ref(null);
       const { createMessage } = useMessage();
       const keyword = ref<string>('');
-      const searchParams = computed<Recordable>(() => {
+      const searchParams = computed<Recordable<string>>(() => {
         return { keyword: unref(keyword) };
       });
 
