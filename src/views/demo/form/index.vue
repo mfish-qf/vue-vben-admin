@@ -510,27 +510,27 @@
         span: 8,
       },
     },
-    // {
-    //   field: 'field36',
-    //   component: 'ApiTree',
-    //   label: '远程Tree',
-    //   helpMessage: ['ApiTree组件', '使用接口提供的数据生成选项'],
-    //   required: true,
-    //   componentProps: {
-    //     api: treeOptionsListApi,
-    //     params: {
-    //       count: 2,
-    //     },
-    //     afterFetch: (v) => {
-    //       //do something
-    //       return v;
-    //     },
-    //     resultField: 'list',
-    //   },
-    //   colProps: {
-    //     span: 8,
-    //   },
-    // },
+    {
+      field: 'field36',
+      component: 'ApiTree',
+      label: '远程Tree',
+      helpMessage: ['ApiTree组件', '使用接口提供的数据生成选项'],
+      required: true,
+      componentProps: {
+        api: treeOptionsListApi,
+        params: {
+          count: 2,
+        },
+        afterFetch: (v) => {
+          //do something
+          return v;
+        },
+        resultField: 'list',
+      },
+      colProps: {
+        span: 8,
+      },
+    },
     {
       field: 'divider-linked',
       component: 'Divider',
@@ -695,6 +695,17 @@
       componentProps: {
         disabled: false,
         allowHalf: true,
+      },
+    },
+    {
+      field: 'field23',
+      component: 'ImageUpload',
+      label: '字段23',
+      colProps: {
+        span: 8,
+      },
+      componentProps: {
+        api: () => Promise.resolve('https://via.placeholder.com/600/92c952'),
       },
     },
   ];
