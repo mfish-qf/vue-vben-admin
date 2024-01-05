@@ -3,7 +3,7 @@
     <Row :gutter="[16, 16]">
       <Col :span="8">
         <BasicTree title="基础示例，默认展开第一层" :treeData="treeData" defaultExpandLevel="1">
-          <template #icon><SmileTwoTone /></template>
+          <template #icon><SmileTwoTone style="font-size: 16px" /></template>
           <template #title>666</template>
           <template #switcherIcon> <CarryOutOutlined /></template>
         </BasicTree>
@@ -57,12 +57,12 @@
 </template>
 <script lang="ts" setup>
   import { nextTick, ref, unref } from 'vue';
-  import { BasicTree, TreeActionType, TreeItem } from '/@/components/Tree/index';
+  import { BasicTree, TreeActionType, TreeItem } from '@/components/Tree';
   import { treeData } from './data';
-  import { PageWrapper } from '/@/components/Page';
+  import { PageWrapper } from '@/components/Page';
   import { Card, Row, Col, Spin } from 'ant-design-vue';
   import { cloneDeep, uniq } from 'lodash-es';
-  import { isArray } from '/@/utils/is';
+  import { isArray } from '@/utils/is';
   import { type Nullable } from '@vben/types';
   import { SmileTwoTone, CarryOutOutlined } from '@ant-design/icons-vue';
 

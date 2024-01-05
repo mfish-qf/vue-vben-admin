@@ -9,10 +9,10 @@ import type {
   TableRowSelection,
   SizeType,
 } from './types/table';
-import type { FormProps } from '/@/components/Form';
+import type { FormProps } from '@/components/Form';
 
 import { DEFAULT_FILTER_FN, DEFAULT_SORT_FN, FETCH_SETTING, DEFAULT_SIZE } from './const';
-import { propTypes } from '/@/utils/propTypes';
+import { propTypes } from '@/utils/propTypes';
 
 export const basicProps = {
   clickToRowSelect: { type: Boolean, default: true },
@@ -105,6 +105,7 @@ export const basicProps = {
     type: Object as PropType<TableRowSelection | null>,
     default: null,
   },
+  showSelectionBar: propTypes.bool,
   title: {
     type: [String, Function] as PropType<string | ((data: Recordable) => string)>,
     default: null,
